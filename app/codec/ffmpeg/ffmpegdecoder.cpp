@@ -549,7 +549,7 @@ bool FFmpegDecoder::ConformAudioInternal(const QVector<QString> &filenames, cons
   instance_.Seek(0);
 
   // Create resampling context
-  SwrContext* resampler;
+  SwrContext* resampler = nullptr;
   swr_alloc_set_opts2(&resampler,
                      params.channel_layout(),
                      FFmpegUtils::GetFFmpegSampleFormat(params.format()),
