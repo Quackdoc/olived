@@ -81,11 +81,13 @@ SpeedDurationDialog::SpeedDurationDialog(const QVector<ClipBlock *> &clips, cons
     row++;
 
     maintain_audio_pitch_box_ = new QCheckBox(tr("Maintain Audio Pitch"));
+    maintain_audio_pitch_box_->setChecked(true);
     speed_layout->addWidget(maintain_audio_pitch_box_, row, 0, 1, 2);
 
     row++;
 
     ripple_box_ = new QCheckBox(tr("Ripple Trailing Clips"));
+    ripple_box_->setChecked(true);
     speed_layout->addWidget(ripple_box_, row, 0, 1, 2);
   }
 
@@ -167,7 +169,7 @@ SpeedDurationDialog::SpeedDurationDialog(const QVector<ClipBlock *> &clips, cons
   if (start_maintain_audio_pitch_ == -1) {
     maintain_audio_pitch_box_->setTristate();
   } else {
-    maintain_audio_pitch_box_->setChecked(start_maintain_audio_pitch_);
+    maintain_audio_pitch_box_->setChecked(true);
   }
 
   if (start_loop_ == -1) {

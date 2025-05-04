@@ -943,7 +943,7 @@ void ViewerWidget::PlayInternal(int speed, bool in_to_out_only)
   }
 
   // If the playhead is beyond the end, restart at 0
-  if (!recording_) {
+  if (false && !recording_) {
     rational last_frame = GetConnectedNode()->GetLength() - timebase();
     if (!in_to_out_only && GetConnectedNode()->GetPlayhead() >= last_frame) {
       if (speed > 0) {

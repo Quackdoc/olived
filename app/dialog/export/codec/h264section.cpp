@@ -62,7 +62,7 @@ H264Section::H264Section(int default_crf, QWidget *parent) :
   preset_combobox_->addItem(tr("Very Slow"));
 
   //Default to "medium"
-  preset_combobox_->setCurrentIndex(5);
+  preset_combobox_->setCurrentIndex(0);
 
   layout->addWidget(preset_combobox_, row, 1);
 
