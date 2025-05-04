@@ -27,6 +27,8 @@
 #include "timeline/timelineundopointer.h"
 #include "transition.h"
 
+#include <QToolTip>
+
 namespace olive {
 
 TransitionTool::TransitionTool(TimelineWidget *parent) :
@@ -85,7 +87,24 @@ void TransitionTool::MouseMove(TimelineViewMouseEvent *event)
     return;
   }
 
-  MouseMoveInternal(event->GetFrame(), dual_transition_);
+  rational frame = event->GetFrame();
+  MouseMoveInternal(frame, dual_transition_);
+
+  // Show duration of transition in tooltip
+  rational time = frame - drag_start_point_;
+  rational timebase = parent()->GetTimebaseForTrackType(event->GetTrack().type());
+
+  if (Core::instance()->snapping()) {
+    parent()->SnapPoint(snap_points_, &time);
+  }
+
+  QToolTip::hideText();
+  QToolTip::showText(QCursor::pos(),
+                     QString::fromStdString(Timecode::time_to_timecode(time,
+                                                                       timebase,
+                                                                       Core::instance()->GetTimecodeDisplay(),
+                                                                       true)),
+                     parent());
 }
 
 void TransitionTool::MouseRelease(TimelineViewMouseEvent *event)
