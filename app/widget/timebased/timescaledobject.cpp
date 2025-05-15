@@ -123,7 +123,10 @@ void TimeScaledObject::SetScale(const double& scale)
 {
   Q_ASSERT(scale > 0);
 
-  scale_ = std::clamp(scale, min_scale_, max_scale_);
+  if(min_scale_ > max_scale_)
+    scale_ = std::clamp(scale, max_scale_, min_scale_);
+  else
+    scale_ = std::clamp(scale, min_scale_, max_scale_);
 
   ScaleChangedEvent(scale_);
 }
