@@ -355,8 +355,8 @@ FootageDescription FFmpegDecoder::Probe(const QString &filename, CancelAtom *can
               // Read first frame and retrieve some metadata
               if (instance.GetFrame(pkt, frame) >= 0) {
                 // Check if video is interlaced and what field dominance it has if so
-                if (frame->interlaced_frame) {
-                  if (frame->top_field_first) {
+                if (frame->flags & AV_FRAME_FLAG_INTERLACED) {
+                  if (frame->flags & AV_FRAME_FLAG_TOP_FIELD_FIRST) {
                     interlacing = VideoParams::kInterlacedTopFirst;
                   } else {
                     interlacing = VideoParams::kInterlacedBottomFirst;

@@ -786,11 +786,9 @@ void FFmpegEncoder::FlushEncoders()
   }
 
   if (fmt_ctx_) {
-    if (fmt_ctx_->oformat->flags & AVFMT_ALLOW_FLUSH) {
-      int r = av_interleaved_write_frame(fmt_ctx_, nullptr);
-      if (r < 0) {
-        FFmpegError(tr("Failed to write interleaved packet"), r);
-      }
+    int r = av_interleaved_write_frame(fmt_ctx_, nullptr);
+    if (r < 0) {
+      FFmpegError(tr("Failed to write interleaved packet"), r);
     }
   }
 }
