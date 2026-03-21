@@ -131,13 +131,13 @@ TexturePtr OIIODecoder::RetrieveVideoInternal(const RetrieveVideoParams &p)
     buffer_.set_video_params(vp);
     buffer_.allocate();
 
-    qCritical() << "UNIMPLEMENTED!";
+    //qCritical() << "UNIMPLEMENTED!";
     if (p.divider == 1) {
       // Just upload straight to the buffer
-      //image_->read_image(oiio_pix_fmt_, buffer_.data(), OIIO::AutoStride, buffer_.linesize_bytes());
+      image_->read_image(0, 0, 0, image_->spec().nchannels, oiio_pix_fmt_, buffer_.data(), OIIO::AutoStride, buffer_.linesize_bytes());
     } else {
       OIIO::ImageBuf buf(image_->spec());
-      //image_->read_image(image_->spec().format, buf.localpixels(), buf.pixel_stride(), buf.scanline_stride(), buf.z_stride());
+      image_->read_image(0, 0, 0, image_->spec().nchannels, image_->spec().format, buf.localpixels());
 
       // Roughly downsample image for divider (for some reason OIIO::ImageBufAlgo::resample failed here)
       int px_sz = vp.GetBytesPerPixel();
