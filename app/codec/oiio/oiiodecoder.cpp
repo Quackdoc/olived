@@ -131,7 +131,6 @@ TexturePtr OIIODecoder::RetrieveVideoInternal(const RetrieveVideoParams &p)
     buffer_.set_video_params(vp);
     buffer_.allocate();
 
-    //qCritical() << "UNIMPLEMENTED!";
     if (p.divider == 1) {
       // Just upload straight to the buffer
       image_->read_image(0, 0, 0, image_->spec().nchannels, oiio_pix_fmt_, buffer_.data(), OIIO::AutoStride, buffer_.linesize_bytes());
